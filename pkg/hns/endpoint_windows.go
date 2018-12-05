@@ -80,7 +80,17 @@ type EndpointMakerFunc func() (*hcsshim.HNSEndpoint, error)
 // ProvisionEndpoint provisions an endpoint to a container specified by containerID.
 // If an endpoint already exists, the endpoint is reused.
 // This call is idempotent
-func ProvisionEndpoint(epName string, expectedNetworkId string, containerID string, makeEndpoint EndpointMakerFunc) (*hcsshim.HNSEndpoint, error) {
+func ProvisionEndpoint(epName, expectedNetworkId, containerID, netns string, makeEndpoint EndpointMakerFunc) (*hcsshim.HNSEndpoint, error) {
+	if len(netns) == 0 {
+		return nil, nil
+	}
+	if netns != pauseContainerNetNS {
+		_, err := hcsshim.GetHNSEndpointByName(epName)
+		if err != nil {
+			return nil, errors.Annotatef(err, "failed to find HNSEndpoint %s", epName)
+		}
+	}
+
 	// check if endpoint already exists
 	createEndpoint := true
 	hnsEndpoint, err := hcsshim.GetHNSEndpointByName(epName)
