@@ -29,14 +29,14 @@ matrix:
       env: TARGET=amd64
 
 install:
-  - sudo apt-get install gcc-multilib gcc-mingw-w64 -y
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install gcc-multilib gcc-mingw-w64 -y; fi
   - go get github.com/onsi/ginkgo/ginkgo
   - go get github.com/containernetworking/cni/cnitool
 
 script:
  - |
    if [ "${TARGET}" == "amd64" ]; then
-     GOARCH="${TARGET}" ./test.sh
+     GOARCH="${TARGET}" ./test_${TRAVIS_OS_NAME}.sh
    else
      GOARCH="${TARGET}" ./build_linux.sh
    fi
