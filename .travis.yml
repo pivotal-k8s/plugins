@@ -6,6 +6,10 @@ go:
   - 1.10.x
   - 1.11.x
 
+os:
+  - windows
+  - linux
+
 env:
   global:
   - PATH=$GOROOT/bin:$GOPATH/bin:$PATH
@@ -18,6 +22,11 @@ env:
 
 matrix:
   fast_finish: true
+  exclude:
+    - os: windows
+  include:
+    - os: windows
+      env: TARGET=amd64
 
 install:
   - sudo apt-get install gcc-multilib gcc-mingw-w64 -y
