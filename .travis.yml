@@ -22,8 +22,6 @@ env:
 
 matrix:
   fast_finish: true
-  exclude:
-    - os: windows
   include:
     - os: windows
       env: TARGET=amd64
