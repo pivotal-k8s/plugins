@@ -21,4 +21,4 @@ else
   LINT_TARGETS="$PKG"
 fi
 
-bash -c "umask 0; cd ${GOPATH}/src/${REPO_PATH}; PATH=${GOROOT}/bin:$(pwd)/bin:${PATH} ginkgo ${GINKGO_FLAGS}"
+bash -c "umask 0; cd ${GOPATH}/src/${REPO_PATH}; PATH='${GOROOT}/bin:$(pwd)/bin:${PATH}' ginkgo ${GINKGO_FLAGS}"

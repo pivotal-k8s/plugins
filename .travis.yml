@@ -7,7 +7,6 @@ go:
   - 1.11.x
 
 os:
-  - windows
   - linux
 
 env:
@@ -15,15 +14,9 @@ env:
   - PATH=$GOROOT/bin:$GOPATH/bin:$PATH
   matrix:
   - TARGET=amd64
-  - TARGET=arm
-  - TARGET=arm64
-  - TARGET=ppc64le
-  - TARGET=s390x
 
 matrix:
   fast_finish: true
-  exclude:
-    - os: windows
   include:
     - os: windows
       env: TARGET=amd64
