@@ -3,8 +3,8 @@ sudo: required
 dist: trusty
 
 os:
-  linux
-  windows
+  - linux
+  - windows
 
 go:
   - 1.10.x
