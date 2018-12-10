@@ -33,7 +33,6 @@ matrix:
     env: TARGET=s390x
 
 install:
-  - sudo apt-get install gcc-multilib gcc-mingw-w64 -y
   - go get github.com/onsi/ginkgo/ginkgo
   - go get github.com/containernetworking/cni/cnitool
 
