@@ -24,7 +24,13 @@ matrix:
   fast_finish: true
   exclude:
   - os: windows
-    env: TARGET!=amd64
+    env: TARGET=arm
+  - os: windows
+    env: TARGET=arm64
+  - os: windows
+    env: TARGET=ppc64le
+  - os: windows
+    env: TARGET=s390x
 
 install:
   - sudo apt-get install gcc-multilib gcc-mingw-w64 -y
